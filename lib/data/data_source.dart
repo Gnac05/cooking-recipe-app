@@ -70,24 +70,20 @@ class DataSource {
 
   // Share by mail
   void sendEmail(String mailTo, CookingRecipe data) async {
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: mailTo,
-      queryParameters: {
-        'subject': 'RECETTE ${data.nomPlat.toUpperCase()}',
-        'body': Uri.encodeComponent('''
-        Cette recette a été réalisé par ${data.nomAgent}.
-        \nElle dure en moyenne ${data.time} minutes.
-        \nVoici la vidéo de ça réalisation accessible avec ce lien : ${data.urlVideo}
-        \n\n
-        Pour le faire, vous aviez besoins des ingrédients suivants : 
-        ${_prettyPrintIngredients(data.ingredients)}
-        \n\n
-        Maintenant, on vous montre étape par étape comment parvenir aux mêmes résultats que nous :
-        ${_prettyPrintSteps(data.stepsPreparation)}
-        ''')
-      },
-    );
+    // final Uri emailLaunchUri = Uri(
+    //   scheme: 'mailto',
+    //   path: mailTo,
+    //   queryParameters: {
+    //     'subject': 'RECETTE ${data.nomPlat.toUpperCase()}',
+    //     'body': "Cette recette a été réalisé par ${data.nomAgent}.\nElle dure en moyenne ${data.time} minutes.\nVoici la vidéo de ça réalisation accessible avec ce lien : ${data.urlVideo}\n\nPour le faire, vous aviez besoins des ingrédients suivants : ${_prettyPrintIngredients(data.ingredients)}\n\nMaintenant, on vous montre étape par étape comment parvenir aux mêmes résultats que nous :${_prettyPrintSteps(data.stepsPreparation)}"
+    //     },
+    // );
+    final subject =
+        Uri.encodeComponent('RECETTE ${data.nomPlat.toUpperCase()}');
+    final body = Uri.encodeComponent(
+        "Cette recette a été réalisé par ${data.nomAgent}.\nElle dure en moyenne ${data.time} minutes.\nVoici la vidéo de ça réalisation accessible avec ce lien : ${data.urlVideo}\n\nPour le faire, vous aviez besoins des ingrédients suivants : ${_prettyPrintIngredients(data.ingredients)}\n\nMaintenant, on vous montre étape par étape comment parvenir aux mêmes résultats que nous :${_prettyPrintSteps(data.stepsPreparation)}");
+    final emailLaunchUri =
+        Uri.parse("mailto:$mailTo?subject=$subject&body=$body");
     if (await canLaunchUrl(emailLaunchUri)) {
       await launchUrl(emailLaunchUri);
     } else {
