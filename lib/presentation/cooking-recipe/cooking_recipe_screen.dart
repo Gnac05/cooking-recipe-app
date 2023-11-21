@@ -1,7 +1,7 @@
-import 'package:cooking_recipe_app/config/di.dart';
-import 'package:cooking_recipe_app/domain/entities/cooking_recipe.dart';
-import 'package:cooking_recipe_app/model/ingredient.dart';
-import 'package:cooking_recipe_app/presentation/bloc/cooking_recipe_bloc.dart';
+import 'package:cooking_recipe_app/injection_container.dart';
+import 'package:cooking_recipe_app/domain/cooking-recipe/model/cooking_recipe.dart';
+import 'package:cooking_recipe_app/domain/cooking-recipe/model/ingredient.dart';
+import 'package:cooking_recipe_app/application/cooking-recipe/cooking_recipe_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

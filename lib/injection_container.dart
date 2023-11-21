@@ -1,5 +1,5 @@
-import 'package:cooking_recipe_app/data/data_source.dart';
-import 'package:cooking_recipe_app/presentation/bloc/cooking_recipe_bloc.dart';
+import 'package:cooking_recipe_app/infrastructure/cooking-recipe/data-sources/data_source.dart';
+import 'package:cooking_recipe_app/application/cooking-recipe/cooking_recipe_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;

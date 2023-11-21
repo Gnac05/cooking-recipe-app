@@ -1,8 +1,8 @@
 import 'package:card_loading/card_loading.dart';
-import 'package:cooking_recipe_app/config/di.dart';
-import 'package:cooking_recipe_app/presentation/bloc/cooking_recipe_bloc.dart';
-import 'package:cooking_recipe_app/presentation/screen/cooking_recipe_screen.dart';
-import 'package:cooking_recipe_app/presentation/widget/cooking_recipe_widget.dart';
+import 'package:cooking_recipe_app/injection_container.dart';
+import 'package:cooking_recipe_app/application/cooking-recipe/cooking_recipe_bloc.dart';
+import 'package:cooking_recipe_app/presentation/cooking-recipe/cooking_recipe_screen.dart';
+import 'package:cooking_recipe_app/presentation/cooking-recipe/widget/cooking_recipe_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

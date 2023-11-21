@@ -1,5 +1,5 @@
-import 'package:cooking_recipe_app/domain/entities/cooking_recipe.dart';
-import 'package:cooking_recipe_app/model/ingredient.dart';
+import 'package:cooking_recipe_app/domain/cooking-recipe/model/cooking_recipe.dart';
+import 'package:cooking_recipe_app/domain/cooking-recipe/model/ingredient.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';

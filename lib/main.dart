@@ -1,6 +1,6 @@
-import 'package:cooking_recipe_app/presentation/screen/home_screen.dart';
+import 'package:cooking_recipe_app/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cooking_recipe_app/config/di.dart';
+import 'package:cooking_recipe_app/injection_container.dart';
 
 void main() {
   setup();
