@@ -1,55 +1,59 @@
 import 'dart:convert';
 
 class CookingRecipe {
-  final String nomAgent;
-  final String nomPlat;
-  final String urlVideo;
-  final List<String>
+  final String id;
+  final String agent;
+  final String name;
+  final String videoUrl;
+
+  final List<Map<String, String>>
       ingredients; // One Ingredient will be like : nom+quantite+type_quantite (Riz+1+kg)
-  final List<String> stepsPreparation;
-  final int time;
+  final List<Map<String, String>> steps;
+  final int preparationTime;
 
   CookingRecipe({
-    required this.nomAgent,
-    required this.nomPlat,
-    required this.urlVideo,
+    this.id = "ID",
+    required this.agent,
+    required this.name,
+    required this.videoUrl,
     required this.ingredients,
-    required this.stepsPreparation,
-    required this.time,
+    required this.steps,
+    required this.preparationTime,
   });
 
   Map<String, dynamic> toMap() => {
-        "nomAgent": nomAgent,
-        "nomPlat": nomPlat,
-        "urlVideo": urlVideo,
+        "agent": agent,
+        "name": name,
+        "video_url": videoUrl,
         "ingredients": ingredients,
-        "stepsPreparation": stepsPreparation,
-        "time": time
+        "stepsPreparation": steps,
+        "preparation_time": preparationTime
       };
 
   static CookingRecipe fromMap(Map<String, dynamic> map) {
     List tempIng = map["ingredients"];
     List tempSte = map["stepsPreparation"];
-    List<String> ing = [];
+    List<Map<String, String>> ing = [];
     for (var temp in tempIng) {
-      ing.add(temp.toString());
+      ing.add(temp);
     }
-    List<String> ste = [];
+    List<Map<String, String>> ste = [];
     for (var temp in tempSte) {
-      ste.add(temp.toString());
+      ste.add(temp);
     }
     return CookingRecipe(
-      nomAgent: map["nomAgent"],
-      nomPlat: map["nomPlat"],
-      urlVideo: map["urlVideo"],
-      ingredients:  ing,
-      stepsPreparation: ste,
-      time: map["time"]);
-}
+      id: map["id"],
+      agent: map["agent"],
+      name: map["name"],
+      videoUrl: map["video_url"],
+      ingredients: ing,
+      steps: ste,
+      preparationTime: map["preparation_time"],
+    );
+  }
 
   @override
   String toString() => jsonEncode(toMap());
 
   static Map<String, dynamic> toJson(String data) => jsonDecode(data);
-
 }

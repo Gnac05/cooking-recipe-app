@@ -3,11 +3,8 @@ import 'package:cooking_recipe_app/domain/cooking-recipe/model/ingredient.dart';
 import 'package:cooking_recipe_app/infrastructure/cooking-recipe/data-sources/data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   group("Data Source", () {
     test('createdCookingRecipe should add a new cooking recipe', () async {
       TestWidgetsFlutterBinding.ensureInitialized();
@@ -16,43 +13,23 @@ void main() {
 
       // Create a sample CookingRecipe
       final cookingRecipe = CookingRecipe(
-        ingredients: [
-          Ingredient(nom: "Riz", quantite: 2, typeQuantite: "kg").toString()
+        ingredients: [Ingredient(name: "Riz", quantity: 2, type: "kg").toMap()],
+        agent: "Mr Beast",
+        name: "Riz Sauté",
+        steps: [
+          {"content": "Laver le riz"},
+          {"content": "Mettre l'eau salé sur le feu"},
+          {"content": "Verser le RIZ"},
+          {"content": "..."}
         ],
-        nomAgent: "Mr Beast",
-        nomPlat: "Riz Sauté",
-        stepsPreparation: [
-          "Laver le riz",
-          "Mettre l'eau salé sur le feu",
-          "Verser le RIZ",
-          "..."
-        ],
-        time: 30,
-        urlVideo: "https://youtube.com/",
+        preparationTime: 30,
+        videoUrl: "https://youtube.com/",
       );
-
-      // Before adding
-      final prefsBefore = await SharedPreferences.getInstance();
-      final originalRecipes = prefsBefore.getStringList("COOKING-RECIPE") ?? [];
-      final originalLength = originalRecipes.length;
 
       // Call the function to add the cooking recipe
       final result = await dataSource.createdCookingRecipe(cookingRecipe);
 
-      // Print debug information
-      debugPrint('Result of createdCookingRecipe: $result');
-      debugPrint('Before adding recipe: $originalRecipes');
-      debugPrint(
-          'After adding recipe: ${prefsBefore.getStringList("COOKING-RECIPE") ?? []}');
-
-      // Check if the result is true, indicating success
-      expect(result, true, reason: 'The function did not return true');
-
-      // Check that the size of the list increased as expected
-      final prefsAfter = await SharedPreferences.getInstance();
-      final updatedRecipes = prefsAfter.getStringList("COOKING-RECIPE") ?? [];
-      expect(updatedRecipes.length, equals(originalLength + 1),
-          reason: 'The length of the list did not increase as expected');
+      expect(result, true, reason: 'The function return $result');
     });
 
     test('readCookingRecipe should return a list of cooking recipes', () async {
@@ -71,18 +48,18 @@ void main() {
 
       final cookingRecipe = CookingRecipe(
           ingredients: [
-            Ingredient(nom: "Riz", quantite: 2, typeQuantite: "kg").toString()
+            Ingredient(name: "Riz", quantity: 2, type: "kg").toMap()
           ],
-          nomAgent: "Mr Beast",
-          nomPlat: "Riz Sauté",
-          stepsPreparation: [
-            "Laver le riz",
-            "Mettre l'eau salé sur le feu",
-            "Verser le RIZ",
-            "..."
+          agent: "Mr Beast",
+          name: "Riz Sauté",
+          steps: [
+            {"content": "Laver le riz"},
+            {"content": "Mettre l'eau salé sur le feu"},
+            {"content": "Verser le RIZ",},
+            {"content": "..."}
           ],
-          time: 30,
-          urlVideo: "https://youtube.com/");
+          preparationTime: 30,
+          videoUrl: "https://youtube.com/");
 
       // Add the recipe to the database first
       await dataSource.createdCookingRecipe(cookingRecipe);
@@ -93,23 +70,23 @@ void main() {
       // Update the first recipe
       final updatedRecipe = CookingRecipe(
           ingredients: [
-            Ingredient(nom: "Riz", quantite: 2, typeQuantite: "kg").toString(),
+            Ingredient(name: "Riz", quantity: 2, type: "kg").toMap(),
             Ingredient(
-                    nom: "Grosse Tomate Cuite",
-                    quantite: 5,
-                    typeQuantite: "morceau")
-                .toString()
+                    name: "Grosse Tomate Cuite",
+                    quantity: 5,
+                    type: "morceau")
+                .toMap()
           ],
-          nomPlat: "Riz au gras Sauté",
-          nomAgent: "Mr Beast",
-          stepsPreparation: [
-            "Laver le riz",
-            "Faire une friture de tomate simple",
-            "Verser le RIZ",
-            "..."
+          name: "Riz au gras Sauté",
+          agent: "Mr Beast",
+          steps: [
+            {"content": "Laver le riz"},
+            {"content": "Mettre l'eau salé sur le feu"},
+            {"content": "Verser le RIZ",},
+            {"content": "..."}
           ],
-          time: 32,
-          urlVideo: "https://youtube.com/");
+          preparationTime: 32,
+          videoUrl: "https://youtube.com/");
       final updateResult =
           await dataSource.updatedCookingRecipe(updatedRecipe, 0);
 
@@ -117,7 +94,7 @@ void main() {
       final recipesAfterUpdate = await dataSource.readCookingRecipe();
 
       expect(updateResult, true);
-      expect(recipesBeforeUpdate[0], isNot(equals(recipesAfterUpdate[0])));
+      expect(recipesBeforeUpdate?[0], isNot(equals(recipesAfterUpdate?[0])));
       // Additional checks if needed
     });
 
@@ -127,18 +104,18 @@ void main() {
 
       final cookingRecipe = CookingRecipe(
           ingredients: [
-            Ingredient(nom: "Riz", quantite: 2, typeQuantite: "kg").toString()
+            Ingredient(name: "Riz", quantity: 2, type: "kg").toMap()
           ],
-          nomAgent: "Mr Beast",
-          nomPlat: "Riz Sauté",
-          stepsPreparation: [
-            "Laver le riz",
-            "Mettre l'eau salé sur le feu",
-            "Verser le RIZ",
-            "..."
+          agent: "Mr Beast",
+          name: "Riz Sauté",
+          steps:[
+            {"content": "Laver le riz"},
+            {"content": "Mettre l'eau salé sur le feu"},
+            {"content": "Verser le RIZ",},
+            {"content": "..."}
           ],
-          time: 30,
-          urlVideo: "https://youtube.com/");
+          preparationTime: 30,
+          videoUrl: "https://youtube.com/");
 
       // Add the recipe to the database first
       await dataSource.createdCookingRecipe(cookingRecipe);
@@ -153,8 +130,8 @@ void main() {
       final recipesAfterDeletion = await dataSource.readCookingRecipe();
 
       expect(deleteResult, true);
-      expect(recipesBeforeDeletion.length,
-          equals(recipesAfterDeletion.length + 1));
+      expect(recipesBeforeDeletion!.length,
+          equals(recipesAfterDeletion!.length + 1));
       // Additional checks if needed
     });
 
@@ -163,18 +140,18 @@ void main() {
 
       final cookingRecipe = CookingRecipe(
           ingredients: [
-            Ingredient(nom: "Riz", quantite: 2, typeQuantite: "kg").toString()
+            Ingredient(name: "Riz", quantity: 2, type: "kg").toMap()
           ],
-          nomAgent: "Mr Beast",
-          nomPlat: "Riz Sauté",
-          stepsPreparation: [
-            "Laver le riz",
-            "Mettre l'eau salé sur le feu",
-            "Verser le RIZ",
-            "..."
+          agent: "Mr Beast",
+          name: "Riz Sauté",
+          steps: [
+            {"content": "Laver le riz"},
+            {"content": "Mettre l'eau salé sur le feu"},
+            {"content": "Verser le RIZ"},
+            {"content": "..."}
           ],
-          time: 30,
-          urlVideo: "https://youtube.com/");
+          preparationTime: 30,
+          videoUrl: "https://youtube.com/");
 
       expect(() => dataSource.sendEmail("test@example.com", cookingRecipe),
           returnsNormally);

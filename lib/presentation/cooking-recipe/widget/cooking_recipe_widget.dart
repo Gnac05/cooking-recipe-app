@@ -72,13 +72,13 @@ class CookingRecipeWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      cR.nomPlat,
+                      cR.name,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      "${cR.time}min",
+                      "${cR.preparationTime} min",
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),

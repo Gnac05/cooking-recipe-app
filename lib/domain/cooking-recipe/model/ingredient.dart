@@ -1,13 +1,12 @@
 class Ingredient {
-  final String nom;
-  final double quantite;
-  final String typeQuantite;
+  final String name;
+  final double quantity;
+  final String type;
 
-  Ingredient(
-      {required this.nom, required this.quantite, required this.typeQuantite});
+  Ingredient({required this.name, required this.quantity, required this.type});
 
   @override
-  String toString() => "$nom+$quantite+$typeQuantite";
+  String toString() => "$name+$quantity+$type";
 
   static Ingredient? fromString(String data) {
     if (data.contains("+")) {
@@ -17,11 +16,20 @@ class Ingredient {
       final quantity = data.substring(firstIndex + 1, lastIndex);
       final type = data.substring(lastIndex + 1);
       return Ingredient(
-        nom: name,
-        quantite: double.parse(quantity),
-        typeQuantite: type,
+        name: name,
+        quantity: double.parse(quantity),
+        type: type,
       );
     }
-    return Ingredient(nom: "loading", quantite: 0, typeQuantite: "loading");
+    return Ingredient(name: "loading", quantity: 0, type: "loading");
   }
+
+  Map<String, String> toMap() =>
+      {"name": name, "quantity": quantity.toString(), "type": type};
+
+  static fromMap(Map<String, String> map) => Ingredient(
+        name: map["name"]??"",
+        quantity: double.parse(map["quantity"]??"0"),
+        type: map["type"]??"",
+      );
 }

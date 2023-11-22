@@ -34,14 +34,16 @@ class _CookingRecipeScreenState extends State<CookingRecipeScreen> {
     ingredients = <Ingredient>[];
     steps = <String>[];
     if (!widget.isCreation) {
-      steps = widget.cookR!.stepsPreparation;
-      for (var element in widget.cookR!.ingredients) {
-        ingredients.add(Ingredient.fromString(element)!);
+      for (var step in widget.cookR!.steps) {
+        steps.add(step["content"]??"Loading...");
       }
-      agentController.text = widget.cookR!.nomAgent;
-      platController.text = widget.cookR!.nomPlat;
-      timeController.text = widget.cookR!.time.toString();
-      urlController.text = widget.cookR!.urlVideo;
+      for (var map in widget.cookR!.ingredients) {
+        ingredients.add(Ingredient.fromMap(map));
+      }
+      agentController.text = widget.cookR!.agent;
+      platController.text = widget.cookR!.name;
+      timeController.text = widget.cookR!.preparationTime.toString();
+      urlController.text = widget.cookR!.videoUrl;
     }
     super.initState();
   }
@@ -148,7 +150,7 @@ class _CookingRecipeScreenState extends State<CookingRecipeScreen> {
                       Radius.circular(20),
                     ),
                   ),
-                  labelText: "Nom de l'Agent"),
+                  labelText: "name de l'Agent"),
             ),
           ),
           Padding(
@@ -164,7 +166,7 @@ class _CookingRecipeScreenState extends State<CookingRecipeScreen> {
                     Radius.circular(20),
                   ),
                 ),
-                labelText: "Nom du Plat",
+                labelText: "name du Plat",
               ),
             ),
           ),
@@ -245,17 +247,21 @@ class _CookingRecipeScreenState extends State<CookingRecipeScreen> {
                 plat.isNotEmpty &&
                 url.isNotEmpty &&
                 time.isNotEmpty) {
-              final ing = <String>[];
+              final ing = <Map<String, String>>[];
               for (var element in ingredients) {
-                ing.add(element.toString());
+                ing.add(element.toMap());
+              }
+              final stepsMap = <Map<String, String>>[];
+              for (var element in steps) {
+                stepsMap.add({"content": element});
               }
               CookingRecipe cook = CookingRecipe(
-                nomAgent: agent,
-                nomPlat: plat,
-                urlVideo: url,
+                agent: agent,
+                name: plat,
+                videoUrl: url,
                 ingredients: ing,
-                stepsPreparation: steps,
-                time: int.parse(time),
+                steps: stepsMap,
+                preparationTime: int.parse(time),
               );
 
               if (widget.isCreation) {
@@ -334,7 +340,7 @@ class AddIngredient extends StatelessWidget {
                                       Radius.circular(20),
                                     ),
                                   ),
-                                  labelText: "Nom"),
+                                  labelText: "name"),
                             ),
                           ),
                           Padding(
@@ -393,10 +399,10 @@ class AddIngredient extends StatelessWidget {
                               quantiteCtr.text.isNotEmpty) {
                             bloc.add(AddIngredientEvent(
                                 ingredient: Ingredient(
-                                  nom: nomCtr.text.trim(),
-                                  quantite:
+                                  name: nomCtr.text.trim(),
+                                  quantity:
                                       double.parse(quantiteCtr.text.trim()),
-                                  typeQuantite: typeQuCtr.text.trim(),
+                                  type: typeQuCtr.text.trim(),
                                 ),
                                 ingredients: list));
                             Navigator.pop(context);
@@ -416,7 +422,7 @@ class AddIngredient extends StatelessWidget {
           children: List.generate(
             list.length,
             (index) => Text(
-              "• ${list[index].quantite} ${list[index].typeQuantite} de ${list[index].nom}",
+              "• ${list[index].quantity} ${list[index].type} de ${list[index].name}",
               style: const TextStyle(
                 fontSize: 18,
               ),
