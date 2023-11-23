@@ -6,10 +6,11 @@ class CookingRecipe {
   final String name;
   final String videoUrl;
 
-  final List<Map<String, String>>
+  final List<Map<String, dynamic>>
       ingredients; // One Ingredient will be like : nom+quantite+type_quantite (Riz+1+kg)
-  final List<Map<String, String>> steps;
+  final List<Map<String, dynamic>> steps;
   final int preparationTime;
+  final String updatedAt;
 
   CookingRecipe({
     this.id = "ID",
@@ -19,25 +20,27 @@ class CookingRecipe {
     required this.ingredients,
     required this.steps,
     required this.preparationTime,
+    this.updatedAt = "loading"
   });
 
   Map<String, dynamic> toMap() => {
         "agent": agent,
         "name": name,
         "video_url": videoUrl,
-        "ingredients": ingredients,
-        "stepsPreparation": steps,
-        "preparation_time": preparationTime
+        "ingredients_data": ingredients,
+        "steps_data": steps,
+        "preparation_time": preparationTime,
+        "status": true
       };
 
   static CookingRecipe fromMap(Map<String, dynamic> map) {
     List tempIng = map["ingredients"];
-    List tempSte = map["stepsPreparation"];
-    List<Map<String, String>> ing = [];
+    List tempSte = map["steps"];
+    List<Map<String, dynamic>> ing = [];
     for (var temp in tempIng) {
       ing.add(temp);
     }
-    List<Map<String, String>> ste = [];
+    List<Map<String, dynamic>> ste = [];
     for (var temp in tempSte) {
       ste.add(temp);
     }
@@ -49,6 +52,7 @@ class CookingRecipe {
       ingredients: ing,
       steps: ste,
       preparationTime: map["preparation_time"],
+      updatedAt: map["updatedAt"]
     );
   }
 

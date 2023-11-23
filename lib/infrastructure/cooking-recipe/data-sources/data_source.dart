@@ -12,11 +12,23 @@ class DataSource {
   final _apiBaseUrl = "https://dev.afriksmeals.com/api/v1/";
   final _dio = Dio(
     BaseOptions(
+      contentType: "application/json",
       headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
+        "access-control-allow-origin": "*",
+        "allow": "GET,POST,PUT,DELETE,HEAD,OPTIONS",
+        "connection": "keep-alive",
+        "content-language": "fr",
+        //  content-length: 265
+        "accept": "application/json",
+        "content-type": "application/json",
+        "cross-origin-opener-policy": "same-origin",
         'X-CSRFToken':
-            'CrJLAj0kCALhtzbWX87RUqPqqCJJpdUp36qLA6jk6ziJKDGHq8wD9TV7Ye3YpVX1'
+            'CrJLAj0kCALhtzbWX87RUqPqqCJJpdUp36qLA6jk6ziJKDGHq8wD9TV7Ye3YpVX1',
+        "referrer-policy": "same-origin ",
+        "server": "nginx/1.14.0 (Ubuntu)",
+        "vary": "Accept,Accept-Language,Origin",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
       },
     ),
   );
@@ -26,7 +38,11 @@ class DataSource {
     try {
       final map = cookingRecipe.toMap();
       _dio.options.baseUrl = _apiBaseUrl;
-      final response = await _dio.post('recipes', data: map);
+      final response = await _dio.post(
+        'recipes',
+        data: map,
+        // options: Options(),
+      );
 
       if (response.statusCode == 201) {
         return true;
@@ -90,6 +106,8 @@ class DataSource {
   Future<bool> updatedCookingRecipe(CookingRecipe cookingRecipe, int id) async {
     try {
       final map = cookingRecipe.toMap();
+      map["id"] = cookingRecipe.id;
+      map["updatedAt"] = cookingRecipe.updatedAt;
       _dio.options.baseUrl = _apiBaseUrl;
       final response = await _dio.put('recipes/$id', data: map);
 
@@ -110,7 +128,7 @@ class DataSource {
   Future<bool> deletedCookingRecipe(int id) async {
     try {
       _dio.options.baseUrl = _apiBaseUrl;
-      final response = await _dio.delete('recipes/$id');
+      final response = await _dio.delete('recipes/$id/realDelete');
 
       if (response.statusCode == 200) {
         return true;
@@ -147,7 +165,7 @@ class DataSource {
     }
   }
 
-  String _prettyPrintIngredients(List<Map<String, String>> ingredientsStr) {
+  String _prettyPrintIngredients(List<Map<String, dynamic>> ingredientsStr) {
     List<String> ingredients = [];
     for (var str in ingredientsStr) {
       final data = Ingredient.fromMap(str);
@@ -160,7 +178,7 @@ class DataSource {
     return ingredientList;
   }
 
-  String _prettyPrintSteps(List<Map<String, String>> steps) {
+  String _prettyPrintSteps(List<Map<String, dynamic>> steps) {
     String stepList = "";
     for (var ing in steps) {
       stepList += "• ${ing["content"]}\n";

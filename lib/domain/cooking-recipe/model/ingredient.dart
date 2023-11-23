@@ -27,7 +27,7 @@ class Ingredient {
   Map<String, String> toMap() =>
       {"name": name, "quantity": quantity.toString(), "type": type};
 
-  static fromMap(Map<String, String> map) => Ingredient(
+  static fromMap(Map<String, dynamic> map) => Ingredient(
         name: map["name"]??"",
         quantity: double.parse(map["quantity"]??"0"),
         type: map["type"]??"",
