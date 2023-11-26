@@ -7,8 +7,6 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group("Data Source", () {
     test('createdCookingRecipe should add a new cooking recipe', () async {
-      TestWidgetsFlutterBinding.ensureInitialized();
-
       final dataSource = DataSource();
 
       // Create a sample CookingRecipe
@@ -136,6 +134,7 @@ void main() {
     });
 
     test('sendEmail should not throw an exception', () {
+      TestWidgetsFlutterBinding.ensureInitialized();
       final dataSource = DataSource();
 
       final cookingRecipe = CookingRecipe(
