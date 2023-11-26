@@ -14,13 +14,13 @@ class ReadCookingRecipesEvent extends CookingRecipeEvent{
 
 class UpdatedCookingRecipeEvent extends CookingRecipeEvent{
   final CookingRecipe cookingRecipe;
-  final int index;
+  final String index;
 
   UpdatedCookingRecipeEvent({required this.cookingRecipe, required this.index});
 }
 
 class DeletedCookingRecipeEvent extends CookingRecipeEvent{
-  final int index;
+  final String index;
 
   DeletedCookingRecipeEvent({required this.index});
 }

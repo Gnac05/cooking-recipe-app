@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) => GestureDetector(
                       child: CookingRecipeWidget(
-                        cR: data[data.length - 1 - index],
+                        cR: data[index],
                         index: index,
                       ),
                       onTap: () {

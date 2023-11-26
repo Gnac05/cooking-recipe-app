@@ -59,7 +59,7 @@ class _CookingRecipeScreenState extends State<CookingRecipeScreen> {
             IconButton(
               onPressed: () {
                 getIt<CookingRecipeBloc>().add(
-                  DeletedCookingRecipeEvent(index: widget.index!),
+                  DeletedCookingRecipeEvent(index: widget.cookR!.id),
                 );
                 debugPrint("### DeletedCookingRecipeEvent");
                 Navigator.pop(context);
@@ -275,7 +275,7 @@ class _CookingRecipeScreenState extends State<CookingRecipeScreen> {
                 getIt<CookingRecipeBloc>().add(
                   UpdatedCookingRecipeEvent(
                     cookingRecipe: cook,
-                    index: widget.index!,
+                    index: widget.cookR!.id,
                   ),
                 );
                 debugPrint("### UpdatedCookingRecipeEvent");

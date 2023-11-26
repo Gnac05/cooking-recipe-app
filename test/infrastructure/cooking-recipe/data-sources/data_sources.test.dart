@@ -88,13 +88,13 @@ void main() {
           preparationTime: 32,
           videoUrl: "https://youtube.com/");
       final updateResult =
-          await dataSource.updatedCookingRecipe(updatedRecipe, 0);
+          await dataSource.updatedCookingRecipe(updatedRecipe, recipesBeforeUpdate!.first.id);
 
       // Retrieve the updated list of recipes
       final recipesAfterUpdate = await dataSource.readCookingRecipe();
 
       expect(updateResult, true);
-      expect(recipesBeforeUpdate?[0], isNot(equals(recipesAfterUpdate?[0])));
+      expect(recipesBeforeUpdate[0], isNot(equals(recipesAfterUpdate?[0])));
       // Additional checks if needed
     });
 
@@ -124,13 +124,13 @@ void main() {
       final recipesBeforeDeletion = await dataSource.readCookingRecipe();
 
       // Delete the first recipe
-      final deleteResult = await dataSource.deletedCookingRecipe(0);
+      final deleteResult = await dataSource.deletedCookingRecipe(recipesBeforeDeletion!.first.id);
 
       // Retrieve the updated list of recipes
       final recipesAfterDeletion = await dataSource.readCookingRecipe();
 
       expect(deleteResult, true);
-      expect(recipesBeforeDeletion!.length,
+      expect(recipesBeforeDeletion.length,
           equals(recipesAfterDeletion!.length + 1));
       // Additional checks if needed
     });

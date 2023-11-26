@@ -18,11 +18,10 @@ class DataSource {
         "allow": "GET,POST,PUT,DELETE,HEAD,OPTIONS",
         "connection": "keep-alive",
         "content-language": "fr",
-        //  content-length: 265
         "accept": "application/json",
         "content-type": "application/json",
         "cross-origin-opener-policy": "same-origin",
-        'X-CSRFToken':
+        'x-csrf':
             'CrJLAj0kCALhtzbWX87RUqPqqCJJpdUp36qLA6jk6ziJKDGHq8wD9TV7Ye3YpVX1',
         "referrer-policy": "same-origin ",
         "server": "nginx/1.14.0 (Ubuntu)",
@@ -39,10 +38,10 @@ class DataSource {
       final map = cookingRecipe.toMap();
       _dio.options.baseUrl = _apiBaseUrl;
       final response = await _dio.post(
-        'recipes',
+        'recipes/',
         data: map,
-        // options: Options(),
       );
+      // print("Response : $response");
 
       if (response.statusCode == 201) {
         return true;
@@ -61,7 +60,7 @@ class DataSource {
   Future<List<CookingRecipe>?> readCookingRecipe() async {
     try {
       _dio.options.baseUrl = _apiBaseUrl;
-      final response = await _dio.get('recipes');
+      final response = await _dio.get('recipes/');
 
       if (response.statusCode == 200) {
         final cookingRecipes = <CookingRecipe>[];
@@ -85,7 +84,7 @@ class DataSource {
   Future<CookingRecipe?> readOneCookingRecipe(String id) async {
     try {
       _dio.options.baseUrl = _apiBaseUrl;
-      final response = await _dio.get('recipes/$id');
+      final response = await _dio.get('recipes/$id/');
 
       if (response.statusCode == 200) {
         final data = response.data;
@@ -103,13 +102,13 @@ class DataSource {
   }
 
   // Updated Cooking Recipe PUT /$id
-  Future<bool> updatedCookingRecipe(CookingRecipe cookingRecipe, int id) async {
+  Future<bool> updatedCookingRecipe(CookingRecipe cookingRecipe, String id) async {
     try {
       final map = cookingRecipe.toMap();
       map["id"] = cookingRecipe.id;
       map["updatedAt"] = cookingRecipe.updatedAt;
       _dio.options.baseUrl = _apiBaseUrl;
-      final response = await _dio.put('recipes/$id', data: map);
+      final response = await _dio.put('recipes/$id/', data: map);
 
       if (response.statusCode == 200) {
         return true;
@@ -125,10 +124,10 @@ class DataSource {
   }
 
   // Deleted Cooking Recipe
-  Future<bool> deletedCookingRecipe(int id) async {
+  Future<bool> deletedCookingRecipe(String id) async {
     try {
       _dio.options.baseUrl = _apiBaseUrl;
-      final response = await _dio.delete('recipes/$id/realDelete');
+      final response = await _dio.delete('recipes/$id/realDelete/');
 
       if (response.statusCode == 200) {
         return true;
