@@ -36,12 +36,12 @@ class CookingRecipeBloc extends Bloc<CookingRecipeEvent, CookingRecipeState> {
         final cookingRecipes = await getIt<DataSource>().readCookingRecipe();
         if (cookingRecipes == null) {
           emit(
-          CookingRecipeError(
-            message: "Something went wrong !!!",
-          ),
-        );
-        }else {
-        emit(CookingRecipeReady(cookingRecipes: cookingRecipes));
+            CookingRecipeError(
+              message: "Something went wrong !!!",
+            ),
+          );
+        } else {
+          emit(CookingRecipeReady(cookingRecipes: cookingRecipes));
         }
       } catch (e) {
         debugPrint("### Error Message : $e");
