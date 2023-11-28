@@ -70,11 +70,12 @@ class JsapHomeScreen extends StatelessWidget {
           Expanded(
             flex: 12,
             child: ListView.builder(
-              itemCount: 2,
+              physics: const BouncingScrollPhysics(),
+              itemCount: 10,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(3.5),
                 child: DemandWidget(
-                  isNewDemand: (index % 2 == 1),
+                  isNewDemand: !(index % 4 == 3),
                 ),
               ),
             ),

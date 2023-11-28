@@ -10,7 +10,7 @@ class DemandDevisScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Détail de la demande"),
+        title: const Text("Demande devis"),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -21,6 +21,7 @@ class DemandDevisScreen extends StatelessWidget {
         ),
       ),
       body: ListView(
+        physics: const BouncingScrollPhysics(),
         children: [
           const Center(
             child: FaIcon(
