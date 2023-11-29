@@ -1,3 +1,4 @@
+import 'package:cooking_recipe_app/presentation/jsap/widget/demand_button.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/demand_text_widget.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/type_widget.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class DemandDevisScreen extends StatelessWidget {
                 right: MediaQuery.sizeOf(context).width * 0.5 - 25,
                 child: FaIcon(
                   FontAwesomeIcons.caretDown,
-                  color: Colors.white.withOpacity(0.955),
+                  color: ThemeData().scaffoldBackgroundColor,
                   size: 100,
                 ),
               ),
@@ -70,79 +71,21 @@ class DemandDevisScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
+                      DemandButton(
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 25),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(
-                                    width: 2.5, color: Colors.white)),
-                            child: const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.phone,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    "APPEL",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        label: "APPEL",
+                        icon: FontAwesomeIcons.phone,
+                        isBackgroundBlack: true,
                       ),
-                      GestureDetector(
+                      DemandButton(
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 25),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(
-                                    width: 2.5, color: Colors.white)),
-                            child: const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  FaIcon(
-                                    FontAwesomeIcons.commentDots,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    "SMS",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        label: "SMS",
+                        isBackgroundBlack: true,
+                        icon: FontAwesomeIcons.commentDots,
                       ),
                     ],
                   ),
@@ -222,7 +165,7 @@ class DemandDevisScreen extends StatelessWidget {
                   height: 20,
                 ),
                 const Text(
-                  "Type de besion :",
+                  "Type de besoin :",
                   style: TextStyle(fontSize: 16),
                 ),
                 const SizedBox(
@@ -240,93 +183,24 @@ class DemandDevisScreen extends StatelessWidget {
                   "25 allée des Acacias\n33100 Brignols\nTél. 06 62 21 54 54",
                   style: TextStyle(fontSize: 13),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(width: 2.5)),
-                      child: const Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            FaIcon(FontAwesomeIcons.locationPin),
-                            Text(
-                              "Y ALLER",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(width: 2.5)),
-                      child: const Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            FaIcon(FontAwesomeIcons.calendar),
-                            Text(
-                              "AJOUTER UN RDV",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
+                DemandButton(
+                  isBlack: false,
+                  icon: FontAwesomeIcons.locationPin,
+                  label: "Y ALLER",
                   onTap: () {},
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "CREER LE DEVIS",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                ),
+                DemandButton(
+                  isBlack: false,
+                  icon: FontAwesomeIcons.calendar,
+                  label: "AJOUTER UN RDV",
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                DemandButton(
+                  isBlack: true,
+                  label: "CREER LE DEVIS",
+                  onTap: () {},
                 ),
               ],
             ),

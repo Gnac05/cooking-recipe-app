@@ -1,4 +1,5 @@
 import 'package:cooking_recipe_app/presentation/jsap/demand_detail_screen.dart';
+import 'package:cooking_recipe_app/presentation/jsap/widget/demand_button.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/demand_text_widget.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/type_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class DemandWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(color: Colors.white, border: Border.all(width: 2.5, color: Colors.white.withOpacity(0.95),),),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 8),
         child: Column(
@@ -56,8 +57,8 @@ class DemandWidget extends StatelessWidget {
               
               const SizedBox(height: 6,),
               if (isNewDemand)
-                ElevatedButton(
-                  onPressed: () {
+                DemandButton(
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -67,7 +68,8 @@ class DemandWidget extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text("CONSULTER"),
+                  label: "CONSULTER",
+                  isBlack: true
                 ),
               if (!isNewDemand)
                 const Row(
@@ -101,12 +103,12 @@ class DemandWidget extends StatelessWidget {
                   children: [
                     TextButton.icon(
                         onPressed: () {},
-                        icon: const FaIcon(FontAwesomeIcons.angleRight),
-                        label: const Text("OUVRIR")),
+                        icon: const FaIcon(FontAwesomeIcons.angleRight, color: Colors.black),
+                        label: const Text("OUVRIR", style: TextStyle(color: Colors.black,),),),
                     TextButton.icon(
                         onPressed: () {},
-                        icon: const FaIcon(FontAwesomeIcons.xmark),
-                        label: const Text("ME DESISTER")),
+                        icon: const FaIcon(FontAwesomeIcons.xmark, color: Colors.black),
+                        label: const Text("ME DESISTER", style: TextStyle(color: Colors.black,),)),
                   ],
                 ),
                 ],

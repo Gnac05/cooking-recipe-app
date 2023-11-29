@@ -1,4 +1,5 @@
 import 'package:cooking_recipe_app/presentation/jsap/demand_devis_screen.dart';
+import 'package:cooking_recipe_app/presentation/jsap/widget/demand_button.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/type_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
@@ -85,7 +86,7 @@ class DemandDetailScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        color: Colors.white.withOpacity(0.855),
+        color: Colors.white,
         height: 200,
         child: Column(
           children: [
@@ -103,72 +104,23 @@ class DemandDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-            GestureDetector(
+            DemandButton(
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const DemandDevisScreen()));
               },
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.check,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          "J'ACCEPTE LA DEMANDE",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              label: "J'ACCEPTE LA DEMANDE",
+              icon: FontAwesomeIcons.check,
             ),
-            GestureDetector(
+            DemandButton(
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(width: 2.5)),
-                  child: const Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        FaIcon(FontAwesomeIcons.xmark),
-                        Text(
-                          "JE REFUSE LA DEMANDE",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              isBlack: false,
+              label: "JE REFUSE LA DEMANDE",
+              icon: FontAwesomeIcons.xmark,
             ),
           ],
         ),
