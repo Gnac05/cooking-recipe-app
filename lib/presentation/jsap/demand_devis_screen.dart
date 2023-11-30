@@ -1,3 +1,4 @@
+import 'package:cooking_recipe_app/presentation/jsap/creation_devis_screen.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/demand_button.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/demand_text_widget.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/type_widget.dart';
@@ -200,7 +201,14 @@ class DemandDevisScreen extends StatelessWidget {
                 DemandButton(
                   isBlack: true,
                   label: "CREER LE DEVIS",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CreationDevisScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

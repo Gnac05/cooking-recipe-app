@@ -1,3 +1,4 @@
+import 'package:cooking_recipe_app/presentation/jsap/demand_devis_denied_screen.dart';
 import 'package:cooking_recipe_app/presentation/jsap/demand_devis_screen.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/demand_button.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/type_widget.dart';
@@ -116,7 +117,11 @@ class DemandDetailScreen extends StatelessWidget {
             ),
             DemandButton(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DemandDevisDeniedScreen(),
+                    ));
               },
               isBlack: false,
               label: "JE REFUSE LA DEMANDE",

@@ -32,17 +32,21 @@ class DemandButton extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      if(icon!=null) FaIcon(
-                        icon,
-                        color: Colors.white,
-                      ),
+                      if (icon != null)
+                        FaIcon(
+                          icon,
+                          color: Colors.white,
+                        ),
                       const SizedBox(
                         width: 20,
                       ),
                       Text(
                         label,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       )
                     ],
                   ),
@@ -63,12 +67,14 @@ class DemandButton extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                         if(icon!=null) FaIcon(
-                            icon,
-                            color: Colors.white,
-                          ),
+                          if (icon != null)
+                            FaIcon(
+                              icon,
+                              color: Colors.white,
+                            ),
                           Text(
                             label,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -92,9 +98,10 @@ class DemandButton extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          if(icon!=null) FaIcon(icon),
+                          if (icon != null) FaIcon(icon),
                           Text(
                             label,
+                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
