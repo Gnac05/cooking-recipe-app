@@ -30,3 +30,9 @@ class ChangeBillingState extends JsapState {
 
   ChangeBillingState({required this.billing});
 }
+
+class CurrentStepState extends JsapState {
+  final int currentIndex;
+
+  CurrentStepState({required this.currentIndex});
+}

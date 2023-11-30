@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContentBillingStep extends StatelessWidget {
-  const ContentBillingStep({Key? key}) : super(key: key);
+  const ContentBillingStep({Key? key, required this.bloc}) : super(key: key);
+  final JsapBloc bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,9 @@ class ContentBillingStep extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: DemandButton(
                 label: "VALIDER MODE DE FACTURATION",
-                onTap: billingType == 0 ? null : () {},
+                onTap: billingType == 0 ? null : () {
+                bloc.add(ContinueStepEvent(lastIndex: 3));
+                },
               ),
             )
           ],

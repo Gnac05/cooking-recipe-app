@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 
 class ContentSiteStep extends StatelessWidget {
-  const ContentSiteStep({Key? key}) : super(key: key);
+  const ContentSiteStep({Key? key, required this.bloc}) : super(key: key);
+  final JsapBloc bloc;
 
   @override
   Widget build(BuildContext context) {

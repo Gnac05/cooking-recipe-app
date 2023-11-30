@@ -35,3 +35,21 @@ class ChangeBillingEvent extends JsapEvent {
 
   ChangeBillingEvent(this.billing);
 }
+
+class ContinueStepEvent extends JsapEvent {
+  final int lastIndex;
+
+  ContinueStepEvent({required this.lastIndex});
+}
+
+class CancelStepEvent extends JsapEvent {
+  final int lastIndex;
+
+  CancelStepEvent({required this.lastIndex});
+}
+
+class TapStepEvent extends JsapEvent {
+  final int index;
+
+  TapStepEvent({required this.index});
+}

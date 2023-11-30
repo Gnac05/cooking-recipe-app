@@ -8,7 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 
 class ContentTaskStep extends StatelessWidget {
-  const ContentTaskStep({Key? key}) : super(key: key);
+  const ContentTaskStep({Key? key, required this.bloc}) : super(key: key);
+  final JsapBloc bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -265,7 +266,10 @@ class ContentTaskStep extends StatelessWidget {
               ),
             ),
 
-            const DemandButton(label: "ETAPE SUIVANTE (4/5)")
+             DemandButton(label: "ETAPE SUIVANTE (4/5)", onTap: (){
+                bloc.add(ContinueStepEvent(lastIndex: 2));
+
+            },)
       ],
     );
   }
