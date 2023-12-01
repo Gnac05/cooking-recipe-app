@@ -10,66 +10,69 @@ class ContentBillingStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = getIt<JsapBloc>();
+    final blocBilling = getIt<JsapBloc>();
     return BlocBuilder<JsapBloc, JsapState>(
-      bloc: bloc,
+      bloc: blocBilling,
       builder: (context, state) {
         int billingType = 0;
         if (state is ChangeBillingState) {
           billingType = state.billing;
         }
-        return Column(
-          children: [
-            const Text(
-              "Quel type de contrat souhaitez-vous établir ?",
-              style: TextStyle(fontSize: 20),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20, bottom: 15,),
-              child: RadioListTile<int>(
-                value: 1,
-                groupValue: billingType,
-                onChanged: (value) {
-                  bloc.add(
-                    ChangeBillingEvent(
-                      value!,
-                    ),
-                  );
-                },
-                title: const Text("Facture classique"),
-                subtitle: const Text(
-                    "Votre client doit régler le montant TTC défini dans votre devis et facture"),
+        return Padding(
+          padding: const EdgeInsets.only(left: 12, right: 12),
+          child: Column(
+            children: [
+              const Text(
+                "Quel type de contrat souhaitez-vous établir ?",
+                style: TextStyle(fontSize: 20),
               ),
-            ),
-            
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: RadioListTile<int>(
-                value: 2,
-                groupValue: billingType,
-                onChanged: (value) {
-                  bloc.add(
-                    ChangeBillingEvent(
-                      value!,
-                    ),
-                  );
-                },
-                title: const Text("Facture/bon SAP"),
-                subtitle: const Text(
-                    "Votre client bénéficie de l'avance de frais de 50% et ne règle que la moitié du montant total."),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, bottom: 15,),
+                child: RadioListTile<int>(
+                  value: 1,
+                  groupValue: billingType,
+                  onChanged: (value) {
+                    blocBilling.add(
+                      ChangeBillingEvent(
+                        value!,
+                      ),
+                    );
+                  },
+                  title: const Text("Facture classique"),
+                  subtitle: const Text(
+                      "Votre client doit régler le montant TTC défini dans votre devis et facture"),
+                ),
               ),
-            ),
-           
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: DemandButton(
-                label: "VALIDER MODE DE FACTURATION",
-                onTap: billingType == 0 ? null : () {
-                bloc.add(ContinueStepEvent(lastIndex: 3));
-                },
+              
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: RadioListTile<int>(
+                  value: 2,
+                  groupValue: billingType,
+                  onChanged: (value) {
+                    blocBilling.add(
+                      ChangeBillingEvent(
+                        value!,
+                      ),
+                    );
+                  },
+                  title: const Text("Facture/bon SAP"),
+                  subtitle: const Text(
+                      "Votre client bénéficie de l'avance de frais de 50% et ne règle que la moitié du montant total."),
+                ),
               ),
-            )
-          ],
+             
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: DemandButton(
+                  label: "VALIDER MODE DE FACTURATION",
+                  onTap: billingType == 0 ? null : () {
+                  bloc.add(ContinueStepEvent(lastIndex: 3));
+                  },
+                ),
+              )
+            ],
+          ),
         );
       },
     );

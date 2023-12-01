@@ -11,85 +11,87 @@ class ContentClientStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = getIt<JsapBloc>();
+    final blocClient = getIt<JsapBloc>();
     return BlocBuilder<JsapBloc, JsapState>(
-      bloc: bloc,
+      bloc: blocClient,
       builder: (context, state) {
         if (state is CreationClientInitialState) {
-          return Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 14),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "M. René Pierre",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        FaIcon(FontAwesomeIcons.penToSquare),
-                      ],
-                    ),
+          return SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 14, left: 12, right: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "M. René Pierre",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      FaIcon(FontAwesomeIcons.penToSquare),
+                    ],
                   ),
-                  const Text("12 rue des Acacias"),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 14),
-                    child: Text("33150 Blanquefort"),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 14),
-                    child: Text("Tél. 06 62 12 21 21"),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 40),
-                    child: Text("Mail bmartin@gmail.com"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 70),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(color: Colors.white),
-                      child: const Padding(
-                        padding: EdgeInsets.all(14.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 8),
-                              child: Text(
-                                "Adresse de l'intervention : ",
-                                style: TextStyle(fontSize: 18),
-                              ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 12, right: 12),
+                  child: Text("12 rue des Acacias"),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 14, left: 12, right: 12),
+                  child: Text("33150 Blanquefort"),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 14, left: 12, right: 12),
+                  child: Text("Tél. 06 62 12 21 21"),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 40, left: 12, right: 12),
+                  child: Text("Mail bmartin@gmail.com"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 70),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(color: Colors.white),
+                    child: const Padding(
+                      padding: EdgeInsets.all(14.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 8),
+                            child: Text(
+                              "Adresse de l'intervention : ",
+                              style: TextStyle(fontSize: 18),
                             ),
-                            Text("12 rue des Acacias"),
-                            Text("33150 Blanquefort")
-                          ],
-                        ),
+                          ),
+                          Text("12 rue des Acacias"),
+                          Text("33150 Blanquefort")
+                        ],
                       ),
                     ),
                   ),
-                  DemandButton(
-                    label: "ASSOCIER LE CLIENT AU DEVIS",
-                    onTap: () {
-                      bloc.add(AssociatClientEvent());
-                      // emit state Creation Client Successful
-                      // Next Step
-                    },
-                  )
-                ],
-              ),
+                ),
+                DemandButton(
+                  label: "ASSOCIER LE CLIENT AU DEVIS",
+                  onTap: () {
+                    // bloc.add(AssociatClientEvent());
+                    bloc.add(ContinueStepEvent(lastIndex: 0));
+                    // emit state Creation Client Successful
+                    // Next Step
+                  },
+                )
+              ],
             ),
           );
         }
         return Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: TextFormField(
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(
@@ -108,7 +110,7 @@ class ContentClientStep extends StatelessWidget {
             DemandButton(
               label: "CREER UN NOUVEAU CLIENT",
               onTap: () {
-                bloc.add(CreateNewClientEvent());
+                blocClient.add(CreateNewClientEvent());
               },
             ),
           ],

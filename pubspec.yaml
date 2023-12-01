@@ -32,6 +32,7 @@ dependencies:
   card_loading: ^0.3.0
   cupertino_icons: ^1.0.2
   dio: ^5.3.4
+  easy_stepper: ^0.8.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3

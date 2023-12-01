@@ -1,5 +1,6 @@
 import 'package:cooking_recipe_app/application/jsap-bloc/jsap_bloc.dart';
 import 'package:cooking_recipe_app/injection_container.dart';
+import 'package:cooking_recipe_app/presentation/jsap/jsap_home_screen.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/demand_button.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/dropdown_menu_item_delay.dart';
 import 'package:flutter/material.dart';
@@ -24,30 +25,40 @@ class DemandDevisDeniedScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(bottom: 10),
               child: FaIcon(
                 FontAwesomeIcons.xmark,
                 size: 150,
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(bottom: 10),
               child: Text(
                 "Demande refusée",
                 style: TextStyle(fontSize: 20),
               ),
             ),
-            Text("Merci pour votre retour"),
+            const Text("Merci pour votre retour"),
             Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 20),
               child: DemandButton(
                 label: "RETOUR A L'ACCUEIL",
                 isBlack: true,
                 icon: FontAwesomeIcons.circle,
+                onTap: () {
+                  Navigator.popUntil(context, (route) => false);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const JsapHomeScreen(),
+                    ),
+                  );
+                },
               ),
             )
           ],

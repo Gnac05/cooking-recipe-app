@@ -21,11 +21,11 @@ class TaskWidget extends StatelessWidget {
                 width: 200,
                 child: Text(description)),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.0),
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: FaIcon(FontAwesomeIcons.trash),
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: FaIcon(FontAwesomeIcons.penToSquare),
             ),
           ],

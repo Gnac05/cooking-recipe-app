@@ -17,82 +17,94 @@ class ContentSummaryStep extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Récapitulatif de votre devis : "),
-        const Padding(
-          padding: EdgeInsets.only(bottom: 14, top: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    "MISSION : ",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  TypeWidget()
-                ],
-              ),
-              FaIcon(FontAwesomeIcons.penToSquare),
-            ],
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "CLIENT : ",
-                style: TextStyle(
-                  fontSize: 15,
-                ),
-              ),
-              FaIcon(FontAwesomeIcons.penToSquare),
-            ],
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(bottom: 40.0),
-          child: Row(
+        Padding(
+          padding: const EdgeInsets.only(left: 12, right: 12),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 8, right: 40),
-                child: FaIcon(
-                  FontAwesomeIcons.imagePortrait,
-                  size: 75,
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10.0, top: 8),
-                    child: Text(
-                      "M. Bernard Martin",
+            children: [const Text("Récapitulatif de votre devis : ", style: TextStyle(fontSize: 15),),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 14, top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "MISSION : ",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15,
                       ),
                     ),
+                    TypeWidget()
+                  ],
+                ),
+                FaIcon(FontAwesomeIcons.penToSquare),
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "CLIENT : ",
+                  style: TextStyle(
+                    fontSize: 15,
                   ),
-                  Text("12 rue des Acacias"),
-                  Text("33150 Blanquefort"),
-                  SizedBox(
-                    height: 20,
+                ),
+                FaIcon(FontAwesomeIcons.penToSquare),
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 40.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 8, right: 40),
+                  child: FaIcon(
+                    FontAwesomeIcons.imagePortrait,
+                    size: 75,
                   ),
-                  Text("Tél. 06 62 12 21 21"),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text("Mail bmartin@gmail.com")
-                ],
-              )
-            ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10.0, top: 8),
+                      child: Text(
+                        "M. Bernard Martin",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Text("12 rue des Acacias"),
+                    Text("33150 Blanquefort"),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("Tél. 06 62 12 21 21"),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("Mail bmartin@gmail.com")
+                  ],
+                )
+              ],
+            ),
+          ),],
           ),
         ),
-        const Padding(
+       
+       Padding(
+         padding: const EdgeInsets.only( left: 12, right: 12 ),
+         child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          const Padding(
           padding: EdgeInsets.only(bottom: 8.0),
           child: Divider(),
         ),
@@ -245,7 +257,7 @@ class ContentSummaryStep extends StatelessWidget {
                   TextButton(
                     onPressed: () {},
                     child: const Text(
-                      "AJOUTER",
+                      "AFFICHER",
                       style: TextStyle(
                         color: Colors.black,
                       ),
@@ -255,18 +267,26 @@ class ContentSummaryStep extends StatelessWidget {
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 38),
-                child: Text("Aucune"),
+                child: Text("10"),
               ),
             ],
           ),
         ),
+          ],
+         ),
+       ),
 
         const Padding(
           padding: EdgeInsets.only(bottom: 20),
           child: Divider(),
         ),
 
-        const Text("TÂCHES", style: TextStyle(fontWeight: FontWeight.bold)),
+       Padding(
+         padding: const EdgeInsets.only(left: 12, right: 12, bottom: 30),
+         child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+             const Text("TÂCHES", style: TextStyle(fontWeight: FontWeight.bold)),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 15.0),
           child: TaskWidget(
@@ -305,14 +325,14 @@ class ContentSummaryStep extends StatelessWidget {
         ),
         const Text(
           "Matériel et fournitures : ",
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: Colors.grey, fontSize: 15),
         ),
         const Text(
             "Tondeuse thermique, rotofil, fil 25mm, Taille-haie thermique, échafaudage 4m, Essence"),
 
-        const SizedBox(
-          height: 30,
-        ),
+          ],
+         ),
+       ),
         Container(
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -361,7 +381,8 @@ class ContentSummaryStep extends StatelessWidget {
               if (state is SeeMoreState) {
                 isChecked = state.isSeeMore;
               }
-              return SwitchListTile(
+              return SwitchListTile.adaptive(
+                controlAffinity: ListTileControlAffinity.leading,
                 value: isChecked,
                 title: const Text("J'accepte de partager les données tarifaires émises dans ce devis dans ce devis\nEN SAVOIR PLUS"),
                 onChanged: (value) {
@@ -377,7 +398,7 @@ class ContentSummaryStep extends StatelessWidget {
         ),
 
          DemandButton(label: "VALIDER LA CREATION DU DEVIS", onTap: (){
-                bloc.add(ContinueStepEvent(lastIndex: 4));
+                // bloc.add(ContinueStepEvent(lastIndex: 3));
 
         },)
       ],

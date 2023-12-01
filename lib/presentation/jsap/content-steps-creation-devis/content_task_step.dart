@@ -19,7 +19,7 @@ class ContentTaskStep extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(
-          padding: EdgeInsets.only(bottom: 14),
+          padding: EdgeInsets.only(bottom: 14, left: 12, right: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -38,17 +38,23 @@ class ContentTaskStep extends StatelessWidget {
             ],
           ),
         ),
-        const Text(
-          "Nature des travaux : ",
-          style: TextStyle(
-            fontSize: 18,
+        const Padding(
+          padding: EdgeInsets.only(left: 12, right: 12),
+          child: Text(
+            "Nature des travaux : ",
+            style: TextStyle(
+              fontSize: 18,
+            ),
           ),
         ),
-        const Text(
-          "Décrivez chaque tâche à effectuer dans un champ séparé",
-          style: TextStyle(
-            fontSize: 14,
-            fontStyle: FontStyle.italic,
+        const Padding(
+          padding: EdgeInsets.only(left: 12, right: 12),
+          child: Text(
+            "Décrivez chaque tâche à effectuer dans un champ séparé",
+            style: TextStyle(
+              fontSize: 14,
+              fontStyle: FontStyle.italic,
+            ),
           ),
         ),
         const SizedBox(
@@ -58,11 +64,16 @@ class ContentTaskStep extends StatelessWidget {
           width: double.infinity,
           decoration: const BoxDecoration(color: Colors.black12),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Description de la tâche : "),
+                const Text(
+                  "Description de la tâche : ",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20, top: 8),
                   child: TextFormField(
@@ -79,6 +90,9 @@ class ContentTaskStep extends StatelessWidget {
                       child: Center(
                         child: Text(
                           "Tarif : ",
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
@@ -91,12 +105,13 @@ class ContentTaskStep extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(15))),
                             hintText: "0.00",
                           ),
+                          keyboardType: TextInputType.number,
                         ),
                       ),
                     ),
                     const Expanded(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text("€ HT "),
                           FaIcon(
@@ -114,6 +129,9 @@ class ContentTaskStep extends StatelessWidget {
                       child: Center(
                         child: Text(
                           "Quantité : ",
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
@@ -143,12 +161,16 @@ class ContentTaskStep extends StatelessWidget {
                                 FilteringTextInputFormatter.digitsOnly
                               ],
                               decoration: InputDecoration(
-                                  border: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(15))),
-                                  suffixIcon: Column(
+                                border: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15))),
+                                suffixIcon: SizedBox(
+                                  height: 50,
+                                  child: Column(
                                     children: [
-                                      IconButton(
+                                      SizedBox(
+                                        height: 25,
+                                        child: IconButton(
                                           onPressed: () {
                                             blocQuantity.add(
                                               QuantityAddEvent(
@@ -157,8 +179,15 @@ class ContentTaskStep extends StatelessWidget {
                                             );
                                           },
                                           icon: const FaIcon(
-                                              FontAwesomeIcons.angleUp)),
-                                      IconButton(
+                                              FontAwesomeIcons.angleUp,
+                                              color: Colors.black,
+                                              size: 20),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 25,
+                                        child: IconButton(
+                                          color: Colors.white,
                                           onPressed: () {
                                             blocQuantity.add(
                                               QuantityRemoveEvent(
@@ -167,9 +196,16 @@ class ContentTaskStep extends StatelessWidget {
                                             );
                                           },
                                           icon: const FaIcon(
-                                              FontAwesomeIcons.angleDown)),
+                                            FontAwesomeIcons.angleDown,
+                                            color: Colors.black,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      ),
                                     ],
-                                  )),
+                                  ),
+                                ),
+                              ),
                             );
                           },
                         ),
@@ -179,7 +215,7 @@ class ContentTaskStep extends StatelessWidget {
                 ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Divider(),
+                  child: Divider(thickness: 1),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -190,7 +226,8 @@ class ContentTaskStep extends StatelessWidget {
                       if (state is SeeMoreState) {
                         isChecked = state.isSeeMore;
                       }
-                      return SwitchListTile(
+                      return SwitchListTile.adaptive(
+                        controlAffinity: ListTileControlAffinity.leading,
                         value: isChecked,
                         title: const Text("AFFICHER PLUS DE CRITERES"),
                         onChanged: (value) {
@@ -220,29 +257,35 @@ class ContentTaskStep extends StatelessWidget {
         ),
 
         // Add Task
-        const Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text("AJOUTER UNE TÂCHE"),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: FaIcon(FontAwesomeIcons.circlePlus),
-            ),
-          ],
+        const Padding(
+          padding: EdgeInsets.only(right: 12.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text("AJOUTER UNE TÂCHE"),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: FaIcon(FontAwesomeIcons.circlePlus),
+              ),
+            ],
+          ),
         ),
 
         // Add Text
-        const Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text("AJOUTER DU TEXTE"),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: FaIcon(FontAwesomeIcons.circlePlus),
-            ),
-          ],
+        const Padding(
+          padding: EdgeInsets.only(right: 12.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text("AJOUTER DU TEXTE"),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: FaIcon(FontAwesomeIcons.circlePlus),
+              ),
+            ],
+          ),
         ),
 
         const SizedBox(
@@ -250,26 +293,28 @@ class ContentTaskStep extends StatelessWidget {
         ),
 
         const Padding(
-          padding: EdgeInsets.only(bottom : 8, ),
+          padding: EdgeInsets.only(bottom: 8, left: 12, right: 12),
           child: Text("Matériel et fournitures nécessaires : "),
-        ), 
-         Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15))),
-                  hintText: "Tondeuse, rotofil, fil 25mm...",
-                ),
-                minLines: 5,
-                maxLines: 7,
-              ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20.0, left: 12, right: 12),
+          child: TextFormField(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              hintText: "Tondeuse, rotofil, fil 25mm...",
             ),
+            minLines: 5,
+            maxLines: 7,
+          ),
+        ),
 
-             DemandButton(label: "ETAPE SUIVANTE (4/5)", onTap: (){
-                bloc.add(ContinueStepEvent(lastIndex: 2));
-
-            },)
+        DemandButton(
+          label: "ETAPE SUIVANTE (4/5)",
+          onTap: () {
+            bloc.add(ContinueStepEvent(lastIndex: 2));
+          },
+        )
       ],
     );
   }

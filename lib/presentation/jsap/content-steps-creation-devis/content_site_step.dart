@@ -3,6 +3,7 @@ import 'package:cooking_recipe_app/injection_container.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/demand_button.dart';
 import 'package:cooking_recipe_app/presentation/jsap/widget/dropdown_menu_item_delay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 
@@ -12,11 +13,12 @@ class ContentSiteStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController calandarController = TextEditingController();
     final blocTerrain = getIt<JsapBloc>();
     final blocDelay = getIt<JsapBloc>();
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -64,7 +66,10 @@ class ContentSiteStep extends StatelessWidget {
                   }
                   return DropdownButton<int>(
                     borderRadius: BorderRadius.circular(10),
-                    icon: const FaIcon(FontAwesomeIcons.angleDown),
+                    icon: const Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: FaIcon(FontAwesomeIcons.angleDown),
+                    ),
                     underline: Container(
                       height: 40,
                       width: 100,
@@ -102,6 +107,7 @@ class ContentSiteStep extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: TextFormField(
+                      controller: calandarController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
@@ -115,6 +121,24 @@ class ContentSiteStep extends StatelessWidget {
                           ),
                         ),
                       ),
+                      onChanged: (value) {
+                        print("Value : $value");
+                        if (value.length == 2) {
+                          calandarController.text = '$value/';
+                        } else if (value.length > 2) {
+                          if (value.length < 5) {
+                            calandarController.text =
+                                '${value.substring(0, 2)}/${value.substring(2)}';
+                          } else {
+                            calandarController.text =
+                                '${value.substring(0, 2)}/${value.substring(2, 4)}/${value.substring(4)}';
+                          }
+                        }
+                      },
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(8)
+                      ],
                       keyboardType: TextInputType.datetime,
                     ),
                   ),
@@ -145,7 +169,10 @@ class ContentSiteStep extends StatelessWidget {
                         }
                         return DropdownButton<int>(
                           borderRadius: BorderRadius.circular(10),
-                          icon: const FaIcon(FontAwesomeIcons.angleDown),
+                          icon: const Padding(
+                            padding: EdgeInsets.only(right: 8.0),
+                            child: FaIcon(FontAwesomeIcons.angleDown),
+                          ),
                           underline: Container(
                             height: 40,
                             width: 100,
@@ -303,7 +330,12 @@ class ContentSiteStep extends StatelessWidget {
               ),
             ),
 
-            const DemandButton(label: "ETAPE SUIVANTE (3/5)")
+            DemandButton(
+              label: "ETAPE SUIVANTE (3/5)",
+              onTap: () {
+                bloc.add(ContinueStepEvent(lastIndex: 1));
+              },
+            )
           ],
         ),
       ),
