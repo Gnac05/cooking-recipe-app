@@ -10,7 +10,7 @@ class ChangeDelayEvent extends JsapEvent {
 
 class CreateNewClientEvent extends JsapEvent {}
 
-class AssociatClientEvent extends JsapEvent {}
+class SaveClientEvent extends JsapEvent {}
 
 class QuantityAddEvent extends JsapEvent {
   final int lastQuantity;

@@ -1,4 +1,4 @@
-import 'package:cooking_recipe_app/presentation/jsap/jsap_home_screen.dart';
+import 'package:cooking_recipe_app/presentation/jsap/creation_devis_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cooking_recipe_app/injection_container.dart';
 
@@ -22,21 +22,26 @@ class MyApp extends StatelessWidget {
               color: Colors.black, fontSize: 25, fontWeight: FontWeight.w500),
           elevation: 0,
           iconTheme: IconThemeData(
-            color: Colors.black,
+            color: Color(0xffAB5F1C),
           ),
         ),
 
+        scaffoldBackgroundColor: const Color(0xffF5F5F5),
+
         elevatedButtonTheme: const ElevatedButtonThemeData(
           style: ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(Colors.black),
+            backgroundColor: MaterialStatePropertyAll(
+              Color(0xffAB5F1C),
+            ),
           ),
         ),
         // colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFA95050)),
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-        colorSchemeSeed: Colors.black,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black, background: Color(0xffF5F5F5), ),
+        // colorSchemeSeed: Colors.black,
         useMaterial3: false,
       ),
-      home: const JsapHomeScreen(),
+      // home: const JsapHomeScreen(),
+      home: const CreationDevisScreen(),
       // home: const HomeScreen(),
     );
   }

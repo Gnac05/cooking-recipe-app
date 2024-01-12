@@ -16,11 +16,12 @@ class JsapBloc extends Bloc<JsapEvent, JsapState> {
     on<CreateNewClientEvent>((event, emit) {
       emit(CreationClientInitialState());
     });
-    // on<AssociatClientEvent>((event, emit) {
-    //   emit(
-    //     CreationClientSuccessfulState(),
-    //   );
-    // });
+    
+    on<SaveClientEvent>((event, emit) {
+      emit(
+        CreationClientSuccessfulState(),
+      );
+    });
 
     on<QuantityAddEvent>((event, emit){
       emit(QuantityState(quantity: event.lastQuantity + 1,),);

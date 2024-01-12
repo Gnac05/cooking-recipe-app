@@ -51,22 +51,6 @@ class CreationDevisScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Création devis"),
-        bottom: AppBar(
-          leading: const SizedBox(),
-          title: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Nouveau devis (n°123654)",
-                style: TextStyle(fontSize: 22),
-              ),
-              Text(
-                "M. Martin",
-                style: TextStyle(fontSize: 18),
-              ),
-            ],
-          ),
-        ),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -83,27 +67,35 @@ class CreationDevisScreen extends StatelessWidget {
           if (state is CurrentStepState) {
             currentIndex = state.currentIndex;
           }
-          return Column(children: [
+          return Column(
+            children: [
+            const Padding(
+              padding: EdgeInsets.only(bottom:  8.0, top: 10),
+              child: Text(
+              "Nouveau devis (1234-1234-1234)",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, ), textAlign: TextAlign.start,
+                          ),
+            ),
             Expanded(
               child: EasyStepper(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 lineStyle: const LineStyle(
-                    lineLength: 30,
+                    lineLength: 40,
                     lineSpace: 0,
                     lineType: LineType.normal,
                     defaultLineColor: Colors.grey,
                     finishedLineColor: Colors.grey,
                     activeLineColor: Colors.black,
-                    lineThickness: 2.5),
+                    lineThickness: 0.5),
                 activeStepTextColor: Colors.black,
-
+          
                 finishedStepTextColor: Colors.grey,
-
-                internalPadding: 0,
+          
+                internalPadding: 8,
                 showLoadingAnimation: false,
-                stepRadius: 15,
+                stepRadius: 10,
                 showStepBorder: false,
-
+          
                 // connectorColor: MaterialStatePropertyAll(Colors.black),
                 //     bloc.add(ContinueStepEvent(lastIndex: currentIndex));
                 //   }
@@ -111,7 +103,7 @@ class CreationDevisScreen extends StatelessWidget {
                 // onStepCancel: () {
                 //   bloc.add(CancelStepEvent(lastIndex: currentIndex));
                 // },
-
+          
                 // onStepTapped: (value) {
                 //   debugPrint('On Tap $value');
                 //   bloc.add(TapStepEvent(index: value));
@@ -148,20 +140,21 @@ class CreationDevisScreen extends StatelessWidget {
                   stepsData.length,
                   (index) => EasyStep(
                       customStep: CircleAvatar(
-                        radius: 20,
+                        radius: 30,
                         backgroundColor: Colors.transparent,
                         child: CircleAvatar(
-                          radius: currentIndex == index ? 20 : 15,
+                          radius: currentIndex >= index ? 30 : 5,
                           backgroundColor: currentIndex == index
-                              ? Colors.black
+                              ? Colors.green :
+                              currentIndex > index? const Color(0xffAB5F1C)
                               : Colors.grey,
                           child: currentIndex < index
                               ? null
                               : FaIcon(
-                                  currentIndex > index
+                                  currentIndex >= index
                                       ? FontAwesomeIcons.check
                                       : null,
-                                  size: 15,
+                                  size:currentIndex == index? 15 : 10,
                                   color: Colors.white,
                                 ),
                         ),
@@ -190,7 +183,7 @@ class CreationDevisScreen extends StatelessWidget {
                       //         ? StepState.complete
                       //         : StepState.indexed,
                       // content: stepsData[index]["content"] as Widget,
-
+          
                       // label: Text(stepsData[index]["label"] as String),
                       // isActive: (currentIndex == index) ? true : false,
                       ),
@@ -199,10 +192,7 @@ class CreationDevisScreen extends StatelessWidget {
             ),
             Expanded(
               flex: 8,
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: stepsData[currentIndex]["content"] as Widget,
-              ),
+              child: stepsData[currentIndex]["content"] as Widget,
             )
           ]);
         },
