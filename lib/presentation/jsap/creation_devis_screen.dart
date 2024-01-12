@@ -63,7 +63,7 @@ class CreationDevisScreen extends StatelessWidget {
       body: BlocBuilder<JsapBloc, JsapState>(
         bloc: bloc,
         builder: (context, state) {
-          int currentIndex = 0;
+          int currentIndex = 1;
           if (state is CurrentStepState) {
             currentIndex = state.currentIndex;
           }
