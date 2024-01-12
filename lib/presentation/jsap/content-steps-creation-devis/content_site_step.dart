@@ -149,7 +149,7 @@ class ContentSiteStep extends StatelessWidget {
                             hintText: "jj/mm/aaaa",
                           ),
                           onChanged: (value) {
-                            print("Value : $value");
+                            debugPrint("Value : $value");
                             if (value.length == 2) {
                               calandarController.text = '$value/';
                             } else if (value.length > 2) {

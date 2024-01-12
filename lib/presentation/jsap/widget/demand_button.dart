@@ -7,6 +7,7 @@ class DemandButton extends StatelessWidget {
       this.isBlack = true,
       this.icon,
       required this.label,
+      this.isEnable = true,
       this.onTap,
       this.isBackgroundBlack = false})
       : super(key: key);
@@ -14,6 +15,7 @@ class DemandButton extends StatelessWidget {
   final bool isBackgroundBlack;
   final IconData? icon;
   final String label;
+  final bool isEnable;
   final void Function()? onTap;
 
   @override
@@ -29,34 +31,35 @@ class DemandButton extends StatelessWidget {
                     border: Border.all(width: 2.5, color: Colors.white)),
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
-                      
-                  child: (icon != null)? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: FaIcon(
-                            icon,
+                  child: (icon != null)
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10.0),
+                              child: FaIcon(
+                                icon,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              label,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        )
+                      : Text(
+                          label,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                      Text(
-                        label,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ) : Text(
-                        label,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
                 ),
               ),
             )
@@ -67,38 +70,40 @@ class DemandButton extends StatelessWidget {
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: const Color(0xffAB5F1C),
+                      color: !isEnable
+                          ? const Color(0xffF5F5F5)
+                          : const Color(0xffAB5F1C),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child:
-                           (icon != null)?
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                            FaIcon(
-                              icon,
-                              color: Colors.white,
+                      child: (icon != null)
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                FaIcon(
+                                  icon,
+                                  color: Colors.white,
+                                ),
+                                Text(
+                                  label,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
+                            )
+                          : Text(
+                              label,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: !isEnable ? const Color(0xff6E6E6E) : Colors.white,
+                              ),
                             ),
-                          Text(
-                            label,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          )
-                        ],
-                      ): Text(
-                            label,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
                     ),
                   ),
                 )
@@ -113,30 +118,32 @@ class DemandButton extends StatelessWidget {
                         border: Border.all(width: 2.5)),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: (icon != null)? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                           Padding(
-                             padding: const EdgeInsets.only(right: 10.0),
-                             child: FaIcon(icon),
-                           ),
-                          Text(
-                            label,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      ) : Center(
-                        child: Text(
-                              label,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
+                      child: (icon != null)
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10.0),
+                                  child: FaIcon(icon),
+                                ),
+                                Text(
+                                  label,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              ],
+                            )
+                          : Center(
+                              child: Text(
+                                label,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                      ),
                     ),
                   ),
                 ),

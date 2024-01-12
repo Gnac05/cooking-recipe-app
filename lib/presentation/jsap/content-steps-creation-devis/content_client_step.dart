@@ -214,7 +214,7 @@ class ContentClientStep extends StatelessWidget {
                     children: [
                       Text(
                         "Merci de vérifier que les informations du client sont correctes :",
-                        style: TextStyle(fontWeight: FontWeight.w100),
+                        style: TextStyle(fontWeight: FontWeight.w100, color: Colors.grey,),
                       ),
                       Padding(
                         padding: EdgeInsets.only(

@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         // colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFA95050)),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black, background: Color(0xffF5F5F5), ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black, background: const Color(0xffF5F5F5), ),
         // colorSchemeSeed: Colors.black,
         useMaterial3: false,
       ),

@@ -53,7 +53,131 @@ class CreationDevisScreen extends StatelessWidget {
         title: const Text("Création devis"),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  content: SizedBox(
+                    height: 190,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: const Color(0xffF9F6E8),
+                                borderRadius: BorderRadius.circular(25)),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Center(
+                                child: FaIcon(
+                                  FontAwesomeIcons.triangleExclamation,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Text(
+                            "Quitter la création du devis ?",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const Text(
+                            "Si vous quittez, votre devis en cours sera supprimé.",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const Text(
+                            "Êtes-vous sûr de vouloir quitter ce devis et revenir à l'accueil ?",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  actions: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    width: 2,
+                                    color: Colors.grey.withOpacity(0.2),
+                                  ),
+                                  right: BorderSide(
+                                    width: 2,
+                                    color: Colors.grey.withOpacity(0.2),
+                                  ),
+                                ),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    "QUITTER",
+                                    style: TextStyle(
+                                      color: Color(0xff6E6E6E),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    width: 2,
+                                    color: Colors.grey.withOpacity(0.2),
+                                  ),
+                                ),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    "CONTINUER",
+                                    style: TextStyle(
+                                      color: Color(0xffAB5F1C),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ]),
+            );
           },
           icon: const FaIcon(
             FontAwesomeIcons.xmark,
@@ -63,18 +187,21 @@ class CreationDevisScreen extends StatelessWidget {
       body: BlocBuilder<JsapBloc, JsapState>(
         bloc: bloc,
         builder: (context, state) {
-          int currentIndex = 1;
+          int currentIndex = 2;
           if (state is CurrentStepState) {
             currentIndex = state.currentIndex;
           }
-          return Column(
-            children: [
+          return Column(children: [
             const Padding(
-              padding: EdgeInsets.only(bottom:  8.0, top: 10),
+              padding: EdgeInsets.only(bottom: 8.0, top: 10),
               child: Text(
-              "Nouveau devis (1234-1234-1234)",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, ), textAlign: TextAlign.start,
-                          ),
+                "Nouveau devis (1234-1234-1234)",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.start,
+              ),
             ),
             Expanded(
               child: EasyStepper(
@@ -88,14 +215,14 @@ class CreationDevisScreen extends StatelessWidget {
                     activeLineColor: Colors.black,
                     lineThickness: 0.5),
                 activeStepTextColor: Colors.black,
-          
+
                 finishedStepTextColor: Colors.grey,
-          
+
                 internalPadding: 8,
                 showLoadingAnimation: false,
                 stepRadius: 10,
                 showStepBorder: false,
-          
+
                 // connectorColor: MaterialStatePropertyAll(Colors.black),
                 //     bloc.add(ContinueStepEvent(lastIndex: currentIndex));
                 //   }
@@ -103,7 +230,7 @@ class CreationDevisScreen extends StatelessWidget {
                 // onStepCancel: () {
                 //   bloc.add(CancelStepEvent(lastIndex: currentIndex));
                 // },
-          
+
                 // onStepTapped: (value) {
                 //   debugPrint('On Tap $value');
                 //   bloc.add(TapStepEvent(index: value));
@@ -145,16 +272,17 @@ class CreationDevisScreen extends StatelessWidget {
                         child: CircleAvatar(
                           radius: currentIndex >= index ? 30 : 5,
                           backgroundColor: currentIndex == index
-                              ? Colors.green :
-                              currentIndex > index? const Color(0xffAB5F1C)
-                              : Colors.grey,
+                              ? Colors.green
+                              : currentIndex > index
+                                  ? const Color(0xffAB5F1C)
+                                  : Colors.grey,
                           child: currentIndex < index
                               ? null
                               : FaIcon(
                                   currentIndex >= index
                                       ? FontAwesomeIcons.check
                                       : null,
-                                  size:currentIndex == index? 15 : 10,
+                                  size: currentIndex == index ? 15 : 10,
                                   color: Colors.white,
                                 ),
                         ),
@@ -183,7 +311,7 @@ class CreationDevisScreen extends StatelessWidget {
                       //         ? StepState.complete
                       //         : StepState.indexed,
                       // content: stepsData[index]["content"] as Widget,
-          
+
                       // label: Text(stepsData[index]["label"] as String),
                       // isActive: (currentIndex == index) ? true : false,
                       ),
